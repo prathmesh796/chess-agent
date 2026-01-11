@@ -16,11 +16,17 @@ datasource db {
 model Game {
   id           String   @id @default(uuid())
   createdAt    DateTime @default(now())
-  result       String
+  result       Result
   pgn          String
   fen          String
   modelVersion String
   status       GameStatus @default(fresh)
+}
+
+enum Result {
+  win
+  loss
+  draw
 }
 
 enum GameStatus {
