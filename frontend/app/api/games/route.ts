@@ -1,9 +1,11 @@
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   const body = await req.json();
 
-  await prisma.game.create({
+  console.log(body);
+
+  const game = await prisma.game.create({
     data: {
       result: body.result,
       pgn: body.pgn,
@@ -13,5 +15,9 @@ export async function POST(req: Request) {
     },
   });
 
-  return Response.json({ ok: true });
+  if(!game) {
+    return Response.json({ ok: false, error: "Failed to create game" }, { status: 500 });
+  }
+
+  return Response.json({ ok: true, game });
 }

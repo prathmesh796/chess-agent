@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
@@ -14,8 +14,8 @@ datasource db {
 }
 
 model Game {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
+  id           String     @id @default(uuid())
+  createdAt    DateTime   @default(now())
   result       Result
   pgn          String
   fen          String
